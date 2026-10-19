@@ -2,6 +2,8 @@
 
 A browser-based chess game built with HTML, CSS and JavaScript. It includes a computer opponent with multiple difficulty levels and requires no build step or project dependencies.
 
+Live Demo: https://lithamadlingozi03.github.io/chess-game/
+
 ## Features
 
 - Standard chess piece movement, legal move validation, check and pinned-piece handling
