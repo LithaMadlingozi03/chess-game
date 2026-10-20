@@ -320,3 +320,127 @@ div * {
   border-radius: 5px;
 }
 .promotion-choice:hover { background: #cfe3ff; }
+
+/* Responsive layout for narrow screens and touch devices. */
+@media (max-width: 560px) {
+  #game {
+    display: grid;
+    grid-template-columns: clamp(22px, 7vw, 36px) repeat(8, minmax(0, 1fr));
+    width: min(504px, calc(100vw - 16px));
+    max-height: none;
+    height: auto;
+    margin: 12px auto;
+    position: static;
+  }
+
+  .cellprefix {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: auto;
+    max-width: none;
+    max-height: none;
+    float: none;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+    aspect-ratio: 1;
+    font-size: clamp(0.7rem, 2.8vw, 0.95rem);
+  }
+
+  .gamecell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    max-height: none;
+    float: none;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+    aspect-ratio: 1;
+    border-radius: 0;
+    font-size: clamp(1.25rem, 8.5vw, 2.35rem);
+    line-height: 1;
+    touch-action: manipulation;
+  }
+
+  #turn {
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: none;
+    max-height: none;
+    height: auto;
+    position: static;
+    float: none;
+    box-sizing: border-box;
+    margin-top: 10px;
+    padding: 8px 6px;
+    font-size: clamp(0.85rem, 3.4vw, 1rem);
+    line-height: 1.3;
+  }
+
+  #controls {
+    grid-column: 1 / -1;
+    clear: none;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 8px;
+    padding-top: 10px;
+  }
+
+  #controls select,
+  #newgame {
+    min-height: 40px;
+    max-width: 100%;
+    font-size: 0.875rem;
+  }
+
+  #controls select {
+    flex: 1 1 135px;
+  }
+
+  /* Avoid persistent hover animations after a tap on touch screens. */
+  .gamecell:hover {
+    color: inherit;
+    transform: none;
+    animation: none;
+  }
+
+  .gamecell:not(.grey):not(.green):hover {
+    background-color: transparent;
+  }
+
+  .gamecell.grey:hover {
+    background-color: rgba(128, 128, 128, 0.801);
+  }
+
+  .gamecell.green:hover {
+    background-color: rgb(65, 161, 73) !important;
+  }
+
+  .promotion-box {
+    width: min(92vw, 360px);
+    padding: 12px;
+  }
+
+  .promotion-choice {
+    font-size: clamp(2rem, 10vw, 2.8rem);
+    margin: 8px 2px 0;
+    padding: 0 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gamecell,
+  .neonblue_txt,
+  .neonorange_txt,
+  .neongreen_txt,
+  .shake-little {
+    animation: none !important;
+    transition: none !important;
+  }
+}
