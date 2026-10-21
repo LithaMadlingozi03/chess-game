@@ -355,7 +355,12 @@
            -30,-40,-40,-50,-50,-40,-40,-30, -20,-30,-30,-40,-40,-30,-30,-20, -10,-20,-20,-20,-20,-20,-20,-10,
            20,20,0,0,0,0,20,20, 20,30,10,0,0,10,30,20]
   };
+  // random: chance of playing a completely random legal move instead of searching.
+  // noise: random centipawn jitter added to each move's score (bigger = sloppier).
   const LEVELS = {
+    beginner: { depth: 1, noise: 0, random: 1 },
+    novice: { depth: 1, noise: 300, random: 0.5 },
+    casual: { depth: 1, noise: 200, random: 0.2 },
     easy: { depth: 1, noise: 120 },
     medium: { depth: 2, noise: 15 },
     hard: { depth: 3, noise: 0 }
@@ -410,8 +415,10 @@
 
   /* Picks a move for the side to move. level: 'easy' | 'medium' | 'hard'. Returns a move or null. */
   function chooseMove(level = 'medium') {
-    const { depth, noise } = LEVELS[level] || LEVELS.medium;
+    const { depth, noise, random = 0 } = LEVELS[level] || LEVELS.medium;
     const moves = orderMoves(legalMoves(state.turn));
+    if (moves.length === 0) return null;
+    if (random && Math.random() < random) return moves[Math.floor(Math.random() * moves.length)];
     let best = null, bestScore = -Infinity;
     for (const m of moves) {
       const undo = doMove(m);

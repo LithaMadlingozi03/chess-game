@@ -44,6 +44,29 @@ for (const level of ['easy', 'medium', 'hard']) {
   else console.log(`ok  mate in one (${level})`);
 }
 
+// Easier levels: must always return a legal move (they are allowed to play badly, not illegally).
+for (const level of ['beginner', 'novice', 'casual']) {
+  t.setupStandard();
+  let plies = 0, bad = false;
+  while (!t.state.result && plies < 60) {
+    const m = t.chooseMove(level);
+    if (!m || !t.legalMoves(t.state.turn).some(x => x.from === m.from && x.to === m.to && x.promo === m.promo)) { bad = true; break; }
+    t.playMove(m);
+    plies++;
+  }
+  if (bad) { failed = true; console.error(`FAIL illegal move at level ${level}`); }
+  else console.log(`ok  ${level} plays legal moves (${plies} plies)`);
+}
+
+// Beginner should not find mate in one reliably (it is random), but must still choose among legal moves.
+t.setupFromFen('6k1/5ppp/8/8/8/8/8/R5K1 w - - 0');
+{
+  const seen = new Set();
+  for (let i = 0; i < 40; i++) { const m = t.chooseMove('beginner'); seen.add(`${m.from}-${m.to}`); }
+  if (seen.size < 3) { failed = true; console.error('FAIL beginner is not varying its moves'); }
+  else console.log('ok  beginner varies its moves');
+}
+
 // Computer opponent: grabs a free queen rather than ignoring it.
 t.setupFromFen('4k3/8/8/3q4/8/8/8/3RK3 w - - 0');
 {

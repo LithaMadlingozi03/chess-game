@@ -10,7 +10,7 @@ Live Demo: https://lithamadlingozi03.github.io/chess-game/
 - Castling, en passant and pawn promotion, with a choice of queen, rook, bishop or knight
 - Checkmate, stalemate, insufficient material, fifty-move rule and threefold repetition detection
 - Highlights for legal moves, the last move and a king in check
-- Play against the computer as White or Black at Easy, Medium or Hard difficulty
+- Play against the computer as White or Black at Beginner, Novice, Casual, Easy, Medium or Hard difficulty
 - Two-player mode on one screen
 - New game button
 
@@ -18,6 +18,9 @@ Live Demo: https://lithamadlingozi03.github.io/chess-game/
 
 The computer opponent uses negamax search, alpha-beta pruning, capture-only quiescence search and piece-square tables.
 
+- **Beginner:** Plays a random legal move every turn.
+- **Novice:** Half of its moves are random; the rest are one-move-ahead picks with a lot of randomness.
+- **Casual:** One move in five is random; the rest are one-move-ahead picks with noticeable randomness.
 - **Easy:** Searches one move ahead, with some randomness.
 - **Medium:** Searches two moves ahead.
 - **Hard:** Searches three moves ahead.
@@ -47,6 +50,7 @@ The tests cover:
 - The computer finding mate in one at each difficulty level
 - The computer capturing an undefended queen
 - The computer playing legal moves over a sequence of turns
+- The easier levels (Beginner, Novice, Casual) always playing legal moves, and Beginner varying its moves
 
 To run the tests, install Node.js and execute:
 
